@@ -25,7 +25,12 @@ export const UserStepsController = ({
   return (
     <div className="grid grid-cols-2 gap-4">
       {canGoPrev && (
-        <Button text="Anterior" onClick={() => dispatch(prevStep())} />
+        <Button
+          text="Anterior"
+          variant="custom"
+          color="#FFF"
+          onClick={() => dispatch(prevStep())}
+        />
       )}
       {canGoNext && (
         <Button

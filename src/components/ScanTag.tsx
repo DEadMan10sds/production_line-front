@@ -8,7 +8,7 @@ export const ScanTag = () => {
     <>
       <h1>Scan</h1>
       <p>{scanned}</p>
-      <UserStepsController canGoPrev={false} canGoNext={scanned === "q"} />
+      <UserStepsController canGoNext={scanned === "q"} />
     </>
   );
 };

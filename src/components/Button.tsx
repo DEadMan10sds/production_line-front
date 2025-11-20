@@ -1,35 +1,40 @@
 import type React from "react";
-
 type ButtonProps = {
   text: string;
-  variant?: string;
+  variant?: "danger" | "secondary" | "default" | "custom";
+  color?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button: React.FC<ButtonProps> = ({
   text,
-  variant = "",
+  variant = "default",
+  color = "#000",
   ...props
 }) => {
-  let style: string = "";
-
-  //Lookup for improvement
-  switch (variant) {
-    case "danger":
-      style =
-        "mt-4 relative p-4 outer-neo before:absolute before:inset-x-0 before:bottom-0 before:h-1 before:bg-gradient-to-r before:from-transparent before:via-red-700 before:to-transparent        before:opacity-30 hover:before:opacity-100        before:transition-opacity before:duration-150";
-      break;
-    case "secondary":
-      style =
-        "mt-4 relative p-4 outer-neo before:absolute before:inset-x-0 before:bottom-0 before:h-1 before:bg-gradient-to-r before:from-transparent before:via-gray-700 before:to-transparent        before:opacity-30 hover:before:opacity-100        before:transition-opacity before:duration-150";
-      break;
-    default:
-      style =
-        "mt-4 relative p-4 outer-neo before:absolute before:inset-x-0 before:bottom-0 before:h-1 before:bg-gradient-to-r before:from-transparent before:via-amber-700 before:to-transparent        before:opacity-30 hover:before:opacity-100        before:transition-opacity before:duration-150";
-      break;
-  }
+  const variantColors = {
+    danger: "#b91c1c", // red-700
+    secondary: "#1d4ed8", // blue-700
+    default: "#b45309", // amber-700
+    custom: color,
+  };
 
   return (
-    <button className={style} {...props}>
+    <button
+      {...props}
+      style={
+        {
+          "--border-color": variantColors[variant],
+        } as React.CSSProperties
+      }
+      className="
+        cursor-pointer mt-4 relative p-4 outer-neo
+        before:absolute before:inset-x-0 before:bottom-0 before:h-1
+        before:bg-gradient-to-r before:from-transparent before:to-transparent
+        before:via-[var(--border-color)]
+        before:opacity-30 hover:before:opacity-100
+        before:transition-opacity before:duration-150
+      "
+    >
       {text}
     </button>
   );
