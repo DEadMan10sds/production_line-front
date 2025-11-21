@@ -1,5 +1,6 @@
 import type { JSX } from "react";
 
 export default interface FlowBase {
-  render(): JSX.Element;
+  settings(): JSX.Element;
+  home(): JSX.Element;
 }

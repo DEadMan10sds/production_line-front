@@ -3,12 +3,14 @@ type ButtonProps = {
   text: string;
   variant?: "danger" | "secondary" | "default" | "custom";
   color?: string;
+  no_neomorph?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button: React.FC<ButtonProps> = ({
   text,
   variant = "default",
   color = "#000",
+  no_neomorph = false,
   ...props
 }) => {
   const variantColors = {
@@ -26,14 +28,14 @@ export const Button: React.FC<ButtonProps> = ({
           "--border-color": variantColors[variant],
         } as React.CSSProperties
       }
-      className="
-        cursor-pointer mt-4 relative p-4 outer-neo
+      className={`cursor-pointer mt-4 relative p-4 ${
+        !no_neomorph && "outer-neo"
+      }
         before:absolute before:inset-x-0 before:bottom-0 before:h-1
         before:bg-linear-to-r before:from-transparent before:to-transparent
         before:via-(--border-color)
         before:opacity-30 hover:before:opacity-100
-        before:transition-opacity before:duration-150
-      "
+        before:transition-opacity before:duration-150`}
     >
       {text}
     </button>
