@@ -19,7 +19,7 @@ export const UserStepsController = ({
     (state: RootState) => state.operation.currentStep
   );
   const steps: number = useSelector(
-    (state: RootState) => state.operation.steps.length
+    (state: RootState) => state.operation.features.length
   );
 
   return (

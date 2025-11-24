@@ -1,12 +1,19 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/Store";
 
-export function useGetInitialComponent({ byId = false }: { byId?: boolean } = {}) {
+export function useGetInitialComponent({ byId = false } = {}) {
+  const { features, currentStep } = useSelector(
+    (state: RootState) => state.operation
+  );
+  if (!features?.length) return null;
+  if (
+    !Number.isInteger(currentStep) ||
+    currentStep < 0 ||
+    currentStep > features.length
+  )
+    return null;
 
-    const steps = useSelector((state: RootState) => state.operation.steps);
-    const currentStep = useSelector((state: RootState) => state.operation.currentStep)
-
-    const initialKey = byId ? steps.find(step => step.id === currentStep)?.elementKey : steps[currentStep].elementKey
-
-    return initialKey
+  return byId
+    ? features.find((s) => s.id === currentStep)?.elementKey ?? null
+    : features[currentStep]?.elementKey ?? null;
 }

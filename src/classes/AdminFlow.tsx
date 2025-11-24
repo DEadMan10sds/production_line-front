@@ -1,9 +1,10 @@
 import type { JSX } from "react";
 import type FlowBase from "../interfaces/FlowBase";
+import { AdminSettings } from "../pages/AdminSettings";
 
 export default class AdminFlow implements FlowBase {
   settings(): JSX.Element {
-    return <h2>Settings admin</h2>;
+    return <AdminSettings />;
   }
 
   home(): JSX.Element {

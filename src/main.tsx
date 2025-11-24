@@ -7,11 +7,18 @@ import { Provider } from "react-redux";
 import { store } from "./store/Store.ts";
 import { Layout } from "./components/Layout.tsx";
 import RenderFlow from "./RenderFlow.tsx";
+import { Login } from "./pages/Login.tsx";
+import { UserLoader } from "./loaders/UserLoader.ts";
 
 const router = createBrowserRouter([
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
     path: "/*",
     element: <Layout />,
+    loader: UserLoader,
     children: [
       {
         index: true,

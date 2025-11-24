@@ -8,6 +8,9 @@ export const UserHome = () => {
     (state: RootState) => state.operation.currentStep
   );
   const elementKey = useGetInitialComponent();
+
+  if (!elementKey) return <>Please select an operation</>;
+
   const CurrentComponent = elementKey && ComponentMap[elementKey];
 
   return (
@@ -16,7 +19,6 @@ export const UserHome = () => {
         <h1>Bienvenido Usuario - Componente principal usuario</h1>
         <p className="text-end">Paso: {currStep}</p>
       </div>
-
       <div className="my-2 flex-col p-6 items-center internal-neo [--shadow-color:#110f0e] [--box-shadow:#272320]">
         {CurrentComponent && <CurrentComponent />}
       </div>
