@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { AuthData } from "../reducer/Auth/Auth";
 
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
@@ -6,7 +7,7 @@ export const AuthApi = createApi({
     baseUrl: import.meta.env.VITE_API_URL,
   }),
   endpoints: (build) => ({
-    login: build.mutation<unknown, unknown>({
+    login: build.mutation<AuthData, unknown>({
       query: (body) => ({
         method: "POST",
         url: "/auth",

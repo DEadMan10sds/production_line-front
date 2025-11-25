@@ -1,7 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AuthApi } from "../../api/AuthApi";
+import GetJsonFromLocalStorage from "../../common/GetJsonFromLocalStorage";
 
-const initialState = { token: null, id: null };
+export type AuthData = {
+  token: string;
+  id: number;
+};
+
+const initialState = GetJsonFromLocalStorage<AuthData>("auth") || {
+  token: null,
+  id: null,
+};
 
 const AuthReducer = createSlice({
   name: "auth",

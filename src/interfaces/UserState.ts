@@ -1,4 +1,10 @@
+import type { Role } from "../types/Role";
+
 export default interface UserState {
-  role: string;
+  roles: Role[];
   name: string;
+  surname: string;
+  email: string;
+  id: number;
+  created_at: string;
 }

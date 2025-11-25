@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/Store";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../reducer/Auth/Auth";
 //import { ChangeRole } from "./ChangeRole";
 
@@ -13,12 +13,9 @@ export const Navbar = () => {
 
   return (
     <div className="flex justify-between py-2 px-8 mb-4 border-b border-stone-700">
-      <Link to="/">
-        <h1 className="text-4xl font-bold my-5">
-          Traceability - {name ? name : "Sin Operación"} - {currentStep}
-        </h1>
-      </Link>
-      {/* <ChangeRole /> */}
+      <h1 className="text-4xl font-bold my-5">
+        Traceability - {name ? name : "Sin Operación"} - {currentStep}
+      </h1>
       <button
         className="cursor-pointer"
         onClick={() => {

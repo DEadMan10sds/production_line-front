@@ -1,24 +1,21 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Role } from "../../types/Role";
+import { createSlice } from "@reduxjs/toolkit";
 import type UserState from "../../interfaces/UserState";
+import { UserApi } from "../../api/UserApi";
+import GetJsonFromLocalStorage from "../../common/GetJsonFromLocalStorage";
 
-const initialState: UserState = {
-  role: "user",
-  name: "Invitado",
-};
+const initialState: UserState =
+  GetJsonFromLocalStorage("user") || ({} as UserState);
 
 const UserReducer = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    setRole(state, action: PayloadAction<Role>) {
-      state.role = action.payload;
-    },
-    setName(state, action: PayloadAction<string>) {
-      state.name = action.payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      UserApi.endpoints.getUser.matchFulfilled,
+      (_state, { payload }) => payload
+    );
   },
 });
 
-export const { setRole, setName } = UserReducer.actions;
 export default UserReducer.reducer;

@@ -9,6 +9,8 @@ import { Layout } from "./components/Layout.tsx";
 import RenderFlow from "./RenderFlow.tsx";
 import { Login } from "./pages/Login.tsx";
 import { UserLoader } from "./loaders/UserLoader.ts";
+import { UsersManager } from "./pages/Users.tsx";
+import { RoleGuard } from "./guards/RoleGuard.ts";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,11 @@ const router = createBrowserRouter([
       {
         path: "settings",
         element: <RenderFlow flowToRender="settings" />,
+      },
+      {
+        path: "users",
+        loader: () => RoleGuard(["admin"]),
+        element: <UsersManager />,
       },
     ],
   },

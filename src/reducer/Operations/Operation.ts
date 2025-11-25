@@ -1,18 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { type Operation } from "../../api/OperationApi";
+import GetJsonFromLocalStorage from "../../common/GetJsonFromLocalStorage";
 
-const localStorageState: string | null = localStorage.getItem("operation");
-
-const initialState: {
-  currentStep: number;
-} & Operation = localStorageState
-  ? JSON.parse(localStorageState)
-  : {
-      currentStep: 0,
-      id: "",
-      name: "",
-      features: [],
-    };
+const initialState = GetJsonFromLocalStorage<
+  {
+    currentStep: number;
+  } & Operation
+>("operation") || {
+  currentStep: 0,
+  id: "",
+  name: "",
+  features: [],
+};
 
 const OperationReducer = createSlice({
   name: "operation",
