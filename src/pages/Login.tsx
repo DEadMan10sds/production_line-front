@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "../components/Button";
+import { Button } from "../components/general/Button";
 import { useLoginMutation } from "../api/AuthApi";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner";

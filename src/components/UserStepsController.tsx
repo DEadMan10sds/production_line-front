@@ -5,7 +5,7 @@ import {
   resetCurrentStep,
 } from "../reducer/Operations/Operation";
 import type { RootState } from "../store/Store";
-import { Button } from "./Button";
+import { Button } from "./general/Button";
 
 export const UserStepsController = ({
   canGoNext = true,

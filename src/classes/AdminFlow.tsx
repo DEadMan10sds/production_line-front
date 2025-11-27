@@ -1,15 +1,25 @@
 import type { JSX } from "react";
 import type FlowBase from "../interfaces/FlowBase";
 import { AdminSettings } from "../pages/AdminSettings";
-import { Link } from "react-router-dom";
+import {
+  AsideLink,
+  type AssideLinkProperties,
+} from "../components/general/AsideLink";
+import { PiGear, PiUser } from "react-icons/pi";
 
 export default class AdminFlow implements FlowBase {
+  private links: AssideLinkProperties[] = [
+    { text: "Usuarios", path: "/users", icon: <PiUser /> },
+    { text: "Configuración", path: "/settings", icon: <PiGear /> },
+  ];
+
   asideLinks(): JSX.Element {
     return (
-      <div className="flex flex-col gap-3">
-        <Link to="/users">Usuarios</Link>
-        <Link to="/settings">Configuración</Link>
-      </div>
+      <>
+        {this.links.map((link) => (
+          <AsideLink {...link} />
+        ))}
+      </>
     );
   }
 

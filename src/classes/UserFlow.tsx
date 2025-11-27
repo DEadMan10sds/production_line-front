@@ -1,13 +1,23 @@
 import type { JSX } from "react";
 import type FlowBase from "../interfaces/FlowBase";
 import { UserHome } from "../components/UserHome";
-import { Link } from "react-router-dom";
+import {
+  AsideLink,
+  type AssideLinkProperties,
+} from "../components/general/AsideLink";
+import { PiHouse } from "react-icons/pi";
 
 export default class UserFlow implements FlowBase {
+  private links: AssideLinkProperties[] = [
+    { text: "Inicio", path: "/", icon: <PiHouse /> },
+  ];
+
   asideLinks(): JSX.Element {
     return (
       <>
-        <Link to="/">Inicio</Link>
+        {this.links.map((link) => (
+          <AsideLink {...link} />
+        ))}
       </>
     );
   }

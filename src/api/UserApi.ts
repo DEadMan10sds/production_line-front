@@ -5,7 +5,7 @@ import type UserState from "../interfaces/UserState";
 export const UserApi = createApi({
   reducerPath: "UserApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL,
+    baseUrl: `${import.meta.env.VITE_API_URL}/users`,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
       if (token) headers.set("authorization", `Bearer ${token}`);
@@ -17,14 +17,29 @@ export const UserApi = createApi({
     getUser: build.query<UserState, unknown>({
       query: (id: string) => `/users/${id}`,
     }),
+    getAllUsers: build.query<UserState[], void>({
+      query: () => "/",
+    }),
     editUser: build.mutation<unknown, { id: number } & Partial<UserState>>({
       query: ({ id, ...body }) => ({
         method: "PATCH",
-        url: `/users/${id}`,
+        url: `/${id}`,
+        body,
+      }),
+    }),
+    createUser: build.mutation<UserState, unknown>({
+      query: (body) => ({
+        method: "POST",
+        url: "/",
         body,
       }),
     }),
   }),
 });
 
-export const { useGetUserQuery, useEditUserMutation } = UserApi;
+export const {
+  useGetUserQuery,
+  useGetAllUsersQuery,
+  useEditUserMutation,
+  useCreateUserMutation,
+} = UserApi;
