@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetAllQuery, type Operation } from "../api/OperationApi";
 import { useDispatch } from "react-redux";
 import { setOperation } from "../reducer/Operations/Operation";
+import { OperationCard } from "../components/Operation/OperationCard";
 
 export const AdminSettings = () => {
   const { data, isLoading } = useGetAllQuery(null);
@@ -12,25 +13,16 @@ export const AdminSettings = () => {
     if (data) setAllOperations(data);
   }, [data]);
 
+  if (isLoading) return <p>Loading...</p>;
+
   return (
-    <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {allOperations?.map((operation) => (
-            <li
-              key={operation.id}
-              onClick={() => {
-                dispatch(setOperation(operation));
-              }}
-              className="cursor-pointer"
-            >
-              {operation.name}
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
+    <div className="flex gap-3">
+      {allOperations?.map((operation) => (
+        <OperationCard
+          operation={operation}
+          action={() => dispatch(setOperation(operation))}
+        />
+      ))}
+    </div>
   );
 };

@@ -38,7 +38,7 @@ export const UsersManager = () => {
           >
             Nuevo Usuario
           </button>
-          <ul className="my-2">
+          <ul className="my-2 h-fit">
             {data?.map((user) => (
               <MemoUserItem key={user.id} user={user} onEdit={handleEdit} />
             ))}
@@ -69,7 +69,7 @@ export const UsersManager = () => {
   if (data && data.length === 0) return <p>No hay usuarios registrados</p>;
 
   return (
-    <div className="relative min-h-[300px]">
+    <div className="relative">
       {Object.entries(modes).map(([m, component]) => (
         <div
           key={m}
